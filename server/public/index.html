@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="server/public/jquery-3.7.0.js"></script>
-    <script src="server/public/client.js"></script>
-    <link rel="stylesheet" href="server/public/styles.css"/>
+    <script src="jquery-3.7.0.js"></script>
+    <script src="client.js"></script>
+    <link rel="stylesheet" href="styles.css"/>
     <title>Server Calculator, Take 2</title>
 </head>
 <body>
@@ -28,10 +28,16 @@
         type="number"
         required
         autocomplete="off">
-
+        <button class="equals-button" id="equals-button">=</button>
+        <button class="clear-button" id="clear">C</button>
     </form>
+    <h3>...and the answer is!</h3>
+    <p id="answer-area"></p>
 
     <h2>Past Maths</h2>
+    <ul id="past-math">
+
+    </ul>
 
 </body>
 </html>
