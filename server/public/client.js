@@ -6,7 +6,7 @@ function onReady(){
     console.log('sir, your jQuery has arrived');
     $('#equals-button').on('click', postMaths);
     $('#calculator-form').on('click', getOperator);
-    //getMaths();
+    getMaths();
 }
 
 let operator;
@@ -63,6 +63,11 @@ function getMaths(){
         });
 } // end getMaths function
 
-function renderToDom(){
-
+function renderToDom(answers){
+    $('#past-math').empty();
+    console.log('math history is:', answers)
+    for (let answer of answers){
+        $('#past-math').append(`
+        <li>${answer.numOne}${answer.operator}${answer.numTwo}=${answer.answer}</li>
+    `)}
 } // end renderToDom function
