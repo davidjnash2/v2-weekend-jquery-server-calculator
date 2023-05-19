@@ -63,10 +63,10 @@ function getMaths(){
         });
 } // end getMaths function
 
-function renderToDom(answers){
+function renderToDom(result){
     $('#past-math').empty();
-    console.log('math history is:', answers)
-    for (let answer of answers){
+    console.log('math history is:', result)
+    for (let answer of result){
         $('#past-math').append(`
         <li>${answer.numOne}${answer.operator}${answer.numTwo}=${answer.answer}</li>
     `)}
