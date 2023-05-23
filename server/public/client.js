@@ -1,8 +1,8 @@
 console.log('clientjs ready! '); // log to test
 
-$(document).ready(onReady);
+$(document).ready(onReady); // load script on page load
 
-function onReady(){
+function onReady(){ // start onReady function
   console.log('sir, your jQuery has arrived'); // log to test
   $('.equals-button').on('click', postMaths); // event listener for equals button click
   $('.operator-button').on('click', getOperator); // event listener for operator button click
@@ -12,9 +12,9 @@ function onReady(){
 
 let operator; // declare unassigned operator variable 
 
-function getOperator(event){ // start get operator function
-  event.preventDefault(); // prevent default browser response
-  operator = $(this).closest().button().id(); // select value of this clicked button
+function getOperator(event){ // start getOperator event handler 
+  event.preventDefault(); // prevent default browser response for click of operator button
+  operator = $(this).closest('button').attr('id'); // use this id attribute to get id of clicked operator button
   console.log('..and the operator is!', operator); // log to test
 } // end getOperator function
 
@@ -23,7 +23,7 @@ function postMaths(event){ // start POST function
   console.log('in doMaths function'); // log to test
   let numOne = $('#first-number').val(); // capture value from first number input
   let numTwo = $('#second-number').val(); // capture value from second number input
-  console.log('equation inputs are:', numOne, operator, numTwo); // log to test
+  console.log('equation inputs are:', numOne, operator, numTwo); // log to test equation
   $.ajax({ // ajax call
     method: 'POST', // POST method
     url: '/maths', // to url maths
@@ -61,18 +61,19 @@ function getMaths(){ // start getMaths function
 } // end getMaths function
 
 function renderToDom(answers){ // start render function
-  $('#answer-area').empty(); // empty answer field
+  $('#answer-field').empty();
   $('#past-math').empty(); // empty equation history field
   console.log('math history is:', answers)  // log to test
+  
   // loop through answers, and append answer field with this result, and update equation history with full list
-  for (let answer of answers){
-    $('#answer-area').append(`${answer.length.result-1}`);
+  for (let i = 0; i < answers.length; i++) {
+    $('#answer-field').append(`${answers[i].result}`);
     $('#past-math').append(`
-      <li>${answer.numOne}${answer.operator}${answer.numTwo}=${answer.result}</li>
-  `)};
+      <li>${answers[i].numOne} ${answers[i].operator} ${answers[i].numTwo} = ${answers[i].result}</li>
+  `);};
 } // end renderToDom function
 
-function clearInputs(event){
+function clearInputs(event){ // clearInputs event handler function
   console.log('in clearInputs function'); // log to test
   event.preventdefault(); // prevent default browser response
   $('#first-number').val(''); // empty first number input
