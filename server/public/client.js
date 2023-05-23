@@ -36,7 +36,7 @@ function postMaths(event){ // start POST function
   .then((response) => { // await response from server
     console.log('Response from server.', response); // log response to test
     getMaths(); // call getMaths function to get updated equation list and render to DOM
-  })
+  }) // end then
   .catch((error) => { // error catch
     console.log('Error in POST', error) // log error
     alert('no can do maths rn'); // error alert
@@ -52,9 +52,10 @@ function getMaths(){ // start getMaths function
   }) // end ajax call
   .then((response) => { // call back response
     console.log('maths from server are:', response);  // log to test
-    if (response.length > 0){
+    // conditional if statement to only run render function when response is an array with data, because rending with empty array on page load was causing errors
+    if (response.length > 0){ // start conditional
      renderToDom(response); // update DOM
-    }})
+    }}) // end conditional and then
   .catch((error) => { // error catch
     console.log('Error in GET', error)  // log error
     alert('no can do maths rn'); // error alert
@@ -62,8 +63,8 @@ function getMaths(){ // start getMaths function
 } // end getMaths function
 
 function renderToDom(answers){ // start render function
-  $('#answer-field').empty();
-  $('#answer-field').append(answers[answers.length-1].result);
+  $('#answer-field').empty(); // clear DOM of area when answer will display
+  $('#answer-field').append(answers[answers.length-1].result); // append answer to current equation only
   $('#past-math').empty(); // empty equation history field
   console.log('math history is:', answers)  // log to test
   // loop through answers, and append answer field with this result, and update equation history with full list
