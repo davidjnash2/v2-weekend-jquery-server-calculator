@@ -52,8 +52,9 @@ function getMaths(){ // start getMaths function
   }) // end ajax call
   .then((response) => { // call back response
     console.log('maths from server are:', response);  // log to test
-    renderToDom(response); // update DOM
-  })
+    if (response.length > 0){
+     renderToDom(response); // update DOM
+    }})
   .catch((error) => { // error catch
     console.log('Error in GET', error)  // log error
     alert('no can do maths rn'); // error alert
@@ -62,15 +63,15 @@ function getMaths(){ // start getMaths function
 
 function renderToDom(answers){ // start render function
   $('#answer-field').empty();
+  $('#answer-field').append(answers[answers.length-1].result);
   $('#past-math').empty(); // empty equation history field
   console.log('math history is:', answers)  // log to test
-  
   // loop through answers, and append answer field with this result, and update equation history with full list
   for (let i = 0; i < answers.length; i++) {
-    $('#answer-field').append(`${answers[i].result}`);
     $('#past-math').append(`
       <li>${answers[i].numOne} ${answers[i].operator} ${answers[i].numTwo} = ${answers[i].result}</li>
-  `);};
+  `);
+  }
 } // end renderToDom function
 
 function clearInputs(event){ // clearInputs event handler function
